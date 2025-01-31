@@ -63,6 +63,8 @@
 #include "geometry_msgs/msg/transform_stamped.hpp"
 #include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"
 
+typedef uint unsigned int;
+
 namespace ur_robot_driver
 {
 enum class PausingState
