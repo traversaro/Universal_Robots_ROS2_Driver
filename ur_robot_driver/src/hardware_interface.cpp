@@ -42,13 +42,13 @@
 #include <utility>
 #include <vector>
 
+#include "ur_robot_driver/hardware_interface.hpp"
 #include "ur_client_library/exceptions.h"
 #include "ur_client_library/ur/tool_communication.h"
 #include "ur_client_library/ur/version_information.h"
 
 #include <rclcpp/logging.hpp>
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
-#include "ur_robot_driver/hardware_interface.hpp"
 #include "ur_robot_driver/urcl_log_handler.hpp"
 
 namespace rtde = urcl::rtde_interface;
@@ -178,7 +178,7 @@ std::vector<hardware_interface::StateInterface> URPositionHardwareInterface::exp
       const std::vector<std::string> fts_names = {
         "force.x", "force.y", "force.z", "torque.x", "torque.y", "torque.z"
       };
-      for (uint j = 0; j < 6; ++j) {
+      for (unsigned int j = 0; j < 6; ++j) {
         state_interfaces.emplace_back(
             hardware_interface::StateInterface(sensor.name, fts_names[j], &urcl_ft_sensor_measurements_[j]));
       }
@@ -958,7 +958,7 @@ hardware_interface::return_type URPositionHardwareInterface::prepare_command_mod
   hardware_interface::return_type ret_val = hardware_interface::return_type::OK;
 
   start_modes_ = std::vector<std::vector<std::string>>(info_.joints.size());
-  stop_modes_ = std::vector<std::vector<uint>>(info_.joints.size());
+  stop_modes_ = std::vector<std::vector<unsigned int>>(info_.joints.size());
   std::vector<std::vector<std::string>> control_modes(info_.joints.size());
   const std::string tf_prefix = info_.hardware_parameters.at("tf_prefix");
 
