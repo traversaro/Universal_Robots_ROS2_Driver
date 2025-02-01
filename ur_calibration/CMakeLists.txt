@@ -37,7 +37,7 @@ target_include_directories(calibration
     ${YAML_CPP_INCLUDE_DIRS}
 )
 target_link_libraries(calibration
-  ${YAML_CPP_LIBRARIES}
+  yaml-cpp::yaml-cpp
 )
 ament_target_dependencies(calibration
   rclcpp
