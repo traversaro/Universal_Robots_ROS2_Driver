@@ -5,7 +5,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-add_compile_options(-Wno-unused-parameter)
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
   message("${PROJECT_NAME}: You did not request a specific build type: selecting 'RelWithDebInfo'.")
@@ -33,9 +33,11 @@ target_include_directories(calibration
     include
     ${EIGEN3_INCLUDE_DIRS}
 )
-target_link_libraries(calibration
-  yaml-cpp
-)
+if(TARGET yaml-cpp::yaml-cpp)
+  target_link_libraries(calibration yaml-cpp::yaml-cpp)
+else()
+  target_link_libraries(calibration yaml-cpp)
+endif()
 ament_target_dependencies(calibration
   rclcpp
   ur_robot_driver
